@@ -2,6 +2,7 @@
 
 //main function codes start
 while (true) {
+    Console.Clear();
     Console.WriteLine("===============ANA MENÜ===============\n1-Devamsızlık Ekleme\n2- Ders Bazında Devamsızlık Görüntüleme\n3-Tarih bazında Devamsızlık Görüntüleme");
     string islemTip = girdiAl("işlem seçiniz");
     if (islemTip == "1") {
@@ -22,6 +23,7 @@ while (true) {
 
 }
 //main function codes end
+
 
 //functions
 string girdiAl(string soruMetni) {
