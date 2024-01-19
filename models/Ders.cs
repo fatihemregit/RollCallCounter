@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace YoklamaTutucu.models
 {
-    public class Ders
+    public  class Ders
     {
-        private string adi { get; set; }
-        private string hocasi { get; set;}
+        public string adi;
+        public string hocasi;
 
-        private int dersdevamsizliksayisi { get; set; } = 0;
-
-        public Ders(string adi, string hocasi, int dersdevamsizliksayisi)
+        public Ders(string adi, string hocasi)
         {
             this.adi = adi;
             this.hocasi = hocasi;
-            this.dersdevamsizliksayisi = dersdevamsizliksayisi;
         }
     }
 }

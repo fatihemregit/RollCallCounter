@@ -3,8 +3,9 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- ders model class ý oluþturuldu
-- iþlem class ý oluþturuldu(clean code amacýyla)(devamsýzlýk iþlemleri için)
+- islemyap class ý kullanýlarak devamsýzlýk ekleme iþlemi için  ders seçimi sistemi yapýldý
+- ders ekleme sistemi yapýldý
+- ders model class bir adetti.ders devamsýzlýk ve Ders class ý olarak iki ayrý model class a dönüþtürüldü(iþlevsellik amacýyla deðiþtirildi)
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -13,8 +14,11 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - basit bir konsol menüsü tasarlandý
 - ders model class ý oluþturuldu
 - iþlem class ý oluþturuldu(clean code amacýyla)(devamsýzlýk iþlemleri için)
+### Gün 2 (19.01.2024)
+- islemyap class ý kullanýlarak devamsýzlýk ekleme iþlemi için  ders seçimi sistemi yapýldý
+- ders ekleme sistemi yapýldý
+- ders model class bir adetti.ders devamsýzlýk ve Ders class ý olarak iki ayrý model class a dönüþtürüldü(iþlevsellik amacýyla deðiþtirildi)
+
 <br>
 yapýlacaklar
-
 ## kendi notlarým
-öncelikle bir model class oluþtur bir tane de iþlem class ý
