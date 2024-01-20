@@ -3,7 +3,7 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- devamsýzýlýk ekleme tarih seçimi sistemi yapýldý
+- devamsýzýlýk ekleme tarih seçimi sistemi tryparse metotudu kullanýlmasý
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -17,7 +17,7 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - ders ekleme sistemi yapýldý
 - ders model class bir adetti.ders devamsýzlýk ve Ders class ý olarak iki ayrý model class a dönüþtürüldü(iþlevsellik amacýyla deðiþtirildi)
 ### Gün 3 (20.01.2024)
-- devamsýzýlýk ekleme tarih seçimi sistemi yapýldý
+- devamsýzýlýk ekleme tarih seçimi sistemi tryparse metotudu kullanýlmasý
 ## yapýlacaklar
 
 ## kendi notlarým

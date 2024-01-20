@@ -81,7 +81,15 @@ while (true)
             //seçilen tarih farklı bir tarih
             Console.WriteLine("Tarih giriniz");
             //not:olduğumuz tarihden daha büyük tarih seçilemez
-            DateTime kullanicininGirdigiTarih = Convert.ToDateTime(Console.ReadLine());
+            DateTime kullanicininGirdigiTarih;
+            if (!(DateTime.TryParse(Console.ReadLine(), out kullanicininGirdigiTarih)))
+            {
+                //tarih seçim işlemi başarısız
+                Console.WriteLine("tarih girişi başarısız\n(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)");
+                Console.ReadLine();
+                continue;
+            }
+
             if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString())) {
                 Console.WriteLine("Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)");
                 Console.ReadLine();
