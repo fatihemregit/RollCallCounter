@@ -42,18 +42,17 @@ namespace YoklamaTutucu
             //eğer ders eklenirse true,ders eklenmez ise false
             bool sonuc = false;
             //ders daha önceden var mı onu kontrol ediyoruz
+            //sonradan aklıma geldi biz bunu küme veri tipi yapsak ya?(böylece 2 tane aynı ders eklenmez)(proje bittikten sonra değerlendir bunu)
+            //yada listenin metotlarını kullanarak elemanın kontrolünü yapsak(Contains vs)
             //TODO burayı daha sonra test et hata çıkma potansiyeli var
             if (dersSayisi() > 0) {
                 //ders var
-                Console.WriteLine("ders ekleme islemyap");
-                Console.ReadLine();
                 foreach (Ders fders in dersler) //tam olarak burada hata veriyor
                 {
                     if (!((fders.adi.ToLower() == ders.adi.ToLower()) && (fders.hocasi.ToLower() == ders.hocasi.ToLower())))
                     {
                         //ders eklenecek
                         //(ders.adi.ToLower() == fders.adi.ToLower()) && (ders.hocasi.ToLower() != fders.hocasi.ToLower())
-                        Console.WriteLine("ders ekle foreach if");
                         dersler.Add(ders);
                         sonuc = true;
                         break;
@@ -70,6 +69,7 @@ namespace YoklamaTutucu
             {
                 //ders yok
                 dersler.Add(ders);
+                sonuc = true;
             }
             
             return sonuc;

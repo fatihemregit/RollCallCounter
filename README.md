@@ -3,9 +3,7 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- islemyap class ý kullanýlarak devamsýzlýk ekleme iþlemi için  ders seçimi sistemi yapýldý
-- ders ekleme sistemi yapýldý
-- ders model class bir adetti.ders devamsýzlýk ve Ders class ý olarak iki ayrý model class a dönüþtürüldü(iþlevsellik amacýyla deðiþtirildi)
+- devamsýzýlýk ekleme tarih seçimi sistemi yapýldý
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -18,7 +16,8 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - islemyap class ý kullanýlarak devamsýzlýk ekleme iþlemi için  ders seçimi sistemi yapýldý
 - ders ekleme sistemi yapýldý
 - ders model class bir adetti.ders devamsýzlýk ve Ders class ý olarak iki ayrý model class a dönüþtürüldü(iþlevsellik amacýyla deðiþtirildi)
+### Gün 3 (20.01.2024)
+- devamsýzýlýk ekleme tarih seçimi sistemi yapýldý
+## yapýlacaklar
 
-<br>
-yapýlacaklar
 ## kendi notlarým

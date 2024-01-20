@@ -12,13 +12,15 @@ while (true)
     string islemTip = girdiAl("işlem seçiniz");
     if (islemTip == "1")
     {
-        Console.WriteLine(islemYap.dersSayisi());
+
         //devamsızlık Ekleme
         Console.WriteLine("Devamsızlık ekleme");
+        Console.WriteLine("Devamsızlık ekleme işlemi 3 işlemden oluşmaktadır\n1.işlem:Ders Seçimi\n2.işlem:Tarih Seçimi\n3.işlem:onay");
+
         //ders seçimi
+        Console.WriteLine("\n1.işlem:ders seçimi");
         Ders SecilenDers;
         if (islemYap.dersSayisi() > 0) {
-            Console.WriteLine("ders var ifi");
             //ders var
             int sayac = 0;
             foreach (Ders d in islemYap.dersleriGetir())
@@ -32,7 +34,9 @@ while (true)
             {
                 //yeni ders ekleme
                 SecilenDers = dersEkle();
-                
+                islemYap.dersEkle(SecilenDers);
+                Console.WriteLine("Yeni ders ekleme işlemi başarılı");
+
             }
             else
             {
@@ -56,14 +60,45 @@ while (true)
             Console.WriteLine("hiç ders olmadığından ders ekleme kodları çalışyor");
             //yeni ders ekleme
             SecilenDers = dersEkle();
+            islemYap.dersEkle(SecilenDers);
+            Console.WriteLine("Yeni ders ekleme işlemi başarılı");
+
         }
-        islemYap.dersEkle(SecilenDers);
-        
-        
-
-
-
+        Console.WriteLine($"Ders Seçimi başarılı\nSeçtiğiniz Ders:{SecilenDers.adi}({SecilenDers.hocasi})");
+        Console.WriteLine("2.işlem : Tarih Seçimi");
+        //Tarih seçimi
+        DateTime SecilenTarih;
+        Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToShortDateString()}");
+        Console.WriteLine($"1-Farklı Bir Tarih");
+        Console.WriteLine("Lütfen yukarıdan numaraya göre tarih seçimi yapınız");
+        String girdi2 = Console.ReadLine();
+        if (girdi2 == "0") {
+            //seçilen tarih bugünün tarihi
+            Console.WriteLine($"Bugünün Tarihi({DateTime.Now.ToShortDateString()}) ni seçtiniz ");
+            SecilenTarih = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+        } 
+        else if (girdi2 == "1") {
+            //seçilen tarih farklı bir tarih
+            Console.WriteLine("Tarih giriniz");
+            //not:olduğumuz tarihden daha büyük tarih seçilemez
+            DateTime kullanicininGirdigiTarih = Convert.ToDateTime(Console.ReadLine());
+            if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString())) {
+                Console.WriteLine("Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)");
+                Console.ReadLine();
+                continue;
+            }
+            SecilenTarih = kullanicininGirdigiTarih;
+        }
+        else
+        {
+            Console.WriteLine("geçersiz işlem Ana menüye döndürülüyorsunuz");
+            Console.ReadLine();
+            continue;
+        }
+        Console.WriteLine($"Tarih seçimi Başarılı seçtiğiniz tarih {SecilenTarih.ToShortDateString()}");
+        Console.ReadLine();
         //islemYap.DevamsizlikEkle();
+
     }
     else if (islemTip == "2")
     {
