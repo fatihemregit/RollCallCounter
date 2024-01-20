@@ -5,6 +5,7 @@ using YoklamaTutucu;
 using YoklamaTutucu.models;
 
 IslemYap islemYap = new IslemYap();
+string devamsizlikIptalBilgilendirmeYazisi = "(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)";
 while (true)
 {
     Console.Clear();
@@ -16,94 +17,22 @@ while (true)
         //devamsızlık Ekleme
         Console.WriteLine("Devamsızlık ekleme");
         Console.WriteLine("Devamsızlık ekleme işlemi 3 işlemden oluşmaktadır\n1.işlem:Ders Seçimi\n2.işlem:Tarih Seçimi\n3.işlem:onay");
-
+        Ders? SecilenDers;
         //ders seçimi
-        Console.WriteLine("\n1.işlem:ders seçimi");
-        Ders SecilenDers;
-        if (islemYap.dersSayisi() > 0) {
-            //ders var
-            int sayac = 0;
-            foreach (Ders d in islemYap.dersleriGetir())
-            {
-
-                Console.WriteLine($"{sayac}-{d.adi}(dersi veren:{d.hocasi})");
-                sayac++;
-            }
-            string girdi = girdiAl("Lütfen yukarıdan numaraya göre ders seçimi yapınız(yeni ders eklemek için e tuşuna basın)");
-            if (girdi == "e" || girdi == "E")
-            {
-                //yeni ders ekleme
-                SecilenDers = dersEkle();
-                islemYap.dersEkle(SecilenDers);
-                Console.WriteLine("Yeni ders ekleme işlemi başarılı");
-
-            }
-            else
-            {
-                //eklenen derslerden seçim yapma
-                try
-                {
-                    int ders = Convert.ToInt32(girdi);
-                    SecilenDers = islemYap.dersleriGetir()[ders];
-                }
-                catch
-                {
-                    Console.WriteLine("Ders Seçimi başarısız ana menüye dönmek için bir tuşa basın");
-                    Console.ReadLine();
-                    continue;
-                }
-            }
-        }
-        else
+        SecilenDers = DersSecim();
+        if (SecilenDers == null)
         {
-            //hiç ders yok
-            Console.WriteLine("hiç ders olmadığından ders ekleme kodları çalışyor");
-            //yeni ders ekleme
-            SecilenDers = dersEkle();
-            islemYap.dersEkle(SecilenDers);
-            Console.WriteLine("Yeni ders ekleme işlemi başarılı");
-
-        }
-        Console.WriteLine($"Ders Seçimi başarılı\nSeçtiğiniz Ders:{SecilenDers.adi}({SecilenDers.hocasi})");
-        Console.WriteLine("2.işlem : Tarih Seçimi");
-        //Tarih seçimi
-        DateTime SecilenTarih;
-        Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToShortDateString()}");
-        Console.WriteLine($"1-Farklı Bir Tarih");
-        Console.WriteLine("Lütfen yukarıdan numaraya göre tarih seçimi yapınız");
-        String girdi2 = Console.ReadLine();
-        if (girdi2 == "0") {
-            //seçilen tarih bugünün tarihi
-            Console.WriteLine($"Bugünün Tarihi({DateTime.Now.ToShortDateString()}) ni seçtiniz ");
-            SecilenTarih = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-        } 
-        else if (girdi2 == "1") {
-            //seçilen tarih farklı bir tarih
-            Console.WriteLine("Tarih giriniz");
-            //not:olduğumuz tarihden daha büyük tarih seçilemez
-            DateTime kullanicininGirdigiTarih;
-            if (!(DateTime.TryParse(Console.ReadLine(), out kullanicininGirdigiTarih)))
-            {
-                //tarih seçim işlemi başarısız
-                Console.WriteLine("tarih girişi başarısız\n(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)");
-                Console.ReadLine();
-                continue;
-            }
-
-            if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString())) {
-                Console.WriteLine("Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)");
-                Console.ReadLine();
-                continue;
-            }
-            SecilenTarih = kullanicininGirdigiTarih;
-        }
-        else
-        {
-            Console.WriteLine("geçersiz işlem Ana menüye döndürülüyorsunuz");
-            Console.ReadLine();
+            //ders seçiminde hata var 
             continue;
         }
-        Console.WriteLine($"Tarih seçimi Başarılı seçtiğiniz tarih {SecilenTarih.ToShortDateString()}");
+
+        //Tarih seçimi
+        DateTime? SecilenTarih = TarihSecim();
+        if (SecilenTarih == null)
+        {
+            //Tarih seçiminde hata var
+            continue;
+        }
         Console.ReadLine();
         //islemYap.DevamsizlikEkle();
 
@@ -139,4 +68,107 @@ Ders dersEkle()
     string dersHocasi = girdiAl("dersi veren öğretim görevlisi");
     Ders SecilenDers = new Ders(dersadi, dersHocasi);
     return SecilenDers;
+}
+Ders? DersSecim()
+{
+    //ders seçimi
+    //ders seçimi başlangıç
+    Console.WriteLine("\n1.işlem:ders seçimi");
+    Ders SecilenDers;
+    if (islemYap.dersSayisi() > 0)
+    {
+        //ders var
+        int sayac = 0;
+        foreach (Ders d in islemYap.dersleriGetir())
+        {
+
+            Console.WriteLine($"{sayac}-{d.adi}(dersi veren:{d.hocasi})");
+            sayac++;
+        }
+        string girdi = girdiAl("Lütfen yukarıdan numaraya göre ders seçimi yapınız(yeni ders eklemek için e tuşuna basın)");
+        if (girdi == "e" || girdi == "E")
+        {
+            //yeni ders ekleme
+            SecilenDers = dersEkle();
+            islemYap.dersEkle(SecilenDers);
+            Console.WriteLine("Yeni ders ekleme işlemi başarılı");
+
+        }
+        else
+        {
+            //eklenen derslerden seçim yapma
+            try
+            {
+                int ders = Convert.ToInt32(girdi);
+                SecilenDers = islemYap.dersleriGetir()[ders];
+            }
+            catch
+            {
+                Console.WriteLine("Ders Seçimi başarısız ana menüye dönmek için bir tuşa basın");
+                Console.ReadLine();
+                return null;
+            }
+        }
+    }
+    else
+    {
+        //hiç ders yok
+        Console.WriteLine("hiç ders olmadığından ders ekleme kodları çalışyor");
+        //yeni ders ekleme
+        SecilenDers = dersEkle();
+        islemYap.dersEkle(SecilenDers);
+        Console.WriteLine("Yeni ders ekleme işlemi başarılı");
+
+    }
+    Console.WriteLine($"Ders Seçimi başarılı\nSeçtiğiniz Ders:{SecilenDers.adi}({SecilenDers.hocasi})");
+    //ders seçimi bitiş
+    return SecilenDers;
+}
+DateTime? TarihSecim()
+{
+    //Tarih seçimi
+    //Tarih seçimi başlangıç
+    Console.WriteLine("2.işlem : Tarih Seçimi");
+    DateTime SecilenTarih;
+    Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToShortDateString()}");
+    Console.WriteLine($"1-Farklı Bir Tarih");
+    Console.WriteLine("Lütfen yukarıdan numaraya göre tarih seçimi yapınız");
+    String girdi2 = Console.ReadLine();
+    if (girdi2 == "0")
+    {
+        //seçilen tarih bugünün tarihi
+        Console.WriteLine($"Bugünün Tarihi({DateTime.Now.ToShortDateString()}) ni seçtiniz ");
+        SecilenTarih = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+    }
+    else if (girdi2 == "1")
+    {
+        //seçilen tarih farklı bir tarih
+        Console.WriteLine("Tarih giriniz");
+        //not:olduğumuz tarihden daha büyük tarih seçilemez
+        DateTime kullanicininGirdigiTarih;
+        if (!(DateTime.TryParse(Console.ReadLine(), out kullanicininGirdigiTarih)))
+        {
+            //tarih seçim işlemi başarısız
+            Console.WriteLine($"tarih girişi başarısız\n{devamsizlikIptalBilgilendirmeYazisi}");
+            Console.ReadLine();
+            return null;
+        }
+
+        if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString()))
+        {
+            Console.WriteLine($"Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n{devamsizlikIptalBilgilendirmeYazisi}");
+            Console.ReadLine();
+            return null;
+        }
+        SecilenTarih = kullanicininGirdigiTarih;
+    }
+    else
+    {
+        Console.WriteLine($"geçersiz işlem\n{devamsizlikIptalBilgilendirmeYazisi}");
+        Console.ReadLine();
+        return null;
+    }
+    Console.WriteLine($"Tarih seçimi Başarılı seçtiğiniz tarih {SecilenTarih.ToShortDateString()}");
+    //Tarih seçimi bitiş
+    return SecilenTarih;
 }
