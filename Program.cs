@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 //main function codes start
+using System;
 using YoklamaTutucu;
 using YoklamaTutucu.models;
 
@@ -62,10 +63,31 @@ string girdiAl(string soruMetni)
     string kullaniciGirdisi = Console.ReadLine();
     return kullaniciGirdisi;
 }
-Ders dersEkle()
+
+bool emptyDataCheckForDersEkle(string kontrolverisi,string kullaniciyaSoyle)
+{
+    //eğer veride boşluk sıkıntısı varsa(boş bırakma,başındaboşluk,sonundaboşluk) true döndürür.sıkıntı yoksa false
+    bool basindaBoslukVarmi = kontrolverisi.StartsWith(" ");
+    bool sonundaBoslukVarmi = kontrolverisi.EndsWith(" ");
+    if ((kontrolverisi == "") || (kontrolverisi == " ") || (basindaBoslukVarmi) || (sonundaBoslukVarmi))
+    {
+        Console.WriteLine($"boş değer hatası(aşağıdaki nedenlerden dolayı hata aldınız\n1-{kullaniciyaSoyle} boş bırakılamaz\n2-{kullaniciyaSoyle} boşluk ile başlayamaz\n3-{kullaniciyaSoyle} boşluk ile bitemez)");
+        return true;
+    }
+    return false;
+}
+Ders? dersEkle()
 {
     string dersadi = girdiAl("eklenecek dersin adı");
+    //empty Data Check for dersAdi Variable(dersadı değişkeni için boş veri kontrolü)
+    if (emptyDataCheckForDersEkle(dersadi, "eklencek dersin adı")) { 
+        return null;
+    }
     string dersHocasi = girdiAl("dersi veren öğretim görevlisi");
+    //empty Data Check for dersHocasi Variable(dersHocasi değişkeni için boş veri kontrolü)
+    if (emptyDataCheckForDersEkle(dersHocasi, "dersi veren öğretim görevlisi")) {
+        return null;
+    }
     Ders SecilenDers = new Ders(dersadi, dersHocasi);
     return SecilenDers;
 }
@@ -74,7 +96,7 @@ Ders? DersSecim()
     //ders seçimi
     //ders seçimi başlangıç
     Console.WriteLine("\n1.işlem:ders seçimi");
-    Ders SecilenDers;
+    Ders? SecilenDers;
     if (islemYap.dersSayisi() > 0)
     {
         //ders var
@@ -90,6 +112,13 @@ Ders? DersSecim()
         {
             //yeni ders ekleme
             SecilenDers = dersEkle();
+            if (SecilenDers == null) {
+                Console.WriteLine("Ders Seçimi başarısız ana menüye dönmek için bir tuşa basın");
+                Console.ReadLine();
+                return null;
+
+            }
+
             islemYap.dersEkle(SecilenDers);
             Console.WriteLine("Yeni ders ekleme işlemi başarılı");
 
@@ -116,6 +145,13 @@ Ders? DersSecim()
         Console.WriteLine("hiç ders olmadığından ders ekleme kodları çalışyor");
         //yeni ders ekleme
         SecilenDers = dersEkle();
+        if (SecilenDers == null)
+        {
+            Console.WriteLine("Ders Seçimi başarısız ana menüye dönmek için bir tuşa basın");
+            Console.ReadLine();
+            return null;
+
+        }
         islemYap.dersEkle(SecilenDers);
         Console.WriteLine("Yeni ders ekleme işlemi başarılı");
 

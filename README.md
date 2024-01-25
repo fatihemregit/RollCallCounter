@@ -20,6 +20,12 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - devamsýzýlýk ekleme tarih seçimi sistemi yapýldý
 - devamsýzýlýk ekleme tarih seçimi sistemi tryparse metotudu kullanýlmasý
 - program.cs deki kodlar(ders seçimi,tarih seçimi) ayrý ayrý  fonksiyonlara atandý
+### Gün 4 (25.01.2024)
+- Ders Ekleme sisteminde kullanýcýnýn geçersiz veri girmesi(baþýnda boþluk,sonunda boþluk,deðer girmeme) engellendi
 ## yapýlacaklar
-- kullanýcýnýn geçersiz veri girme(ör:boþluk) engelleme iþlemleri
+- tarih seçiminde kullanýcýnýn geçersiz veri girme(ör:boþluk) engelleme iþlemleri
 ## kendi notlarým
+
+# projeden kendime çýkarýmlarým
+- while true döngüsünde bir fonksiyon çalýþtýrýyorsak ve while true döngüsünün baþýna dönmek istiyorsak(ör:istemediðimiz bir durum oldu döngünün baþýna gitmemiz lazým) fonksiyonda nerede çýkmak istiyorsak return null yazýyoruz(not:fonksiyonun null deðer döndürmeye uygun olmasý lazým ("donustipi?"))
+  <br> while true döngüsünde null check yapýyoruz.null if inde continue deyimini yazarak döngüyü baþa döndürüyoruz
