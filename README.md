@@ -3,7 +3,7 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- tarih seçiminde kullanýcýnýn geçersiz veri girme(baþýnda boþluk,arasýnda boþluk,sonunda boþluk,boþ veri) engelleme iþlemi
+- Devamsýzlýk ekleme sisteminin bitirilmesi ve kodda ufak düzeltmeler
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -24,6 +24,7 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - Ders Ekleme sisteminde kullanýcýnýn geçersiz veri girmesi(baþýnda boþluk,sonunda boþluk,deðer girmeme) engellendi
 ### Gün 5 (28.01.2024)
 - tarih seçiminde kullanýcýnýn geçersiz veri girme(baþýnda boþluk,arasýnda boþluk,sonunda boþluk,boþ veri) engelleme iþlemi
+- Devamsýzlýk ekleme sisteminin bitirilmesi ve kodda ufak düzeltmeler
 ## yapýlacaklar
 
 ## kendi notlarým

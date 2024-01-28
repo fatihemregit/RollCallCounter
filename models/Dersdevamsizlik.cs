@@ -18,7 +18,6 @@ namespace YoklamaTutucu.models
             this.ders = ders;
             this.devamsizlikTarihi = devamsizlikTarihi;
             this.dersdevamsizliksayisi = dersdevamsizliksayisi;
-            //int dersdevamsizliksayisi,
         }
         public void devamsizlikArtir(int adet = 1)
         {
