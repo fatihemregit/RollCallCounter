@@ -35,7 +35,7 @@ while (true)
             continue;
         }
         Console.ReadLine();
-        //islemYap.DevamsizlikEkle();
+        //dersi ekleme ve onay alma
 
     }
     else if (islemTip == "2")
@@ -49,7 +49,8 @@ while (true)
     }
     else
     {
-        Console.WriteLine("Bilinmeyen İşlem!!!");
+        Console.WriteLine("Bilinmeyen İşlem!!!\nana menüye dönmek için bir tuşa basın");
+        Console.ReadLine();
     }
 
 }
