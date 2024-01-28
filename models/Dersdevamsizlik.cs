@@ -13,14 +13,15 @@ namespace YoklamaTutucu.models
         public int dersdevamsizliksayisi;
 
         public DateTime devamsizlikTarihi;
-        public Dersdevamsizlik(Ders ders, DateTime devamsizlikTarihi)
+        public Dersdevamsizlik(Ders ders,int dersdevamsizliksayisi, DateTime devamsizlikTarihi)
         {
             this.ders = ders;
             this.devamsizlikTarihi = devamsizlikTarihi;
-            //this.dersdevamsizliksayisi = dersdevamsizliksayisi;
+            this.dersdevamsizliksayisi = dersdevamsizliksayisi;
             //int dersdevamsizliksayisi,
         }
-        public void devamsizlikArtir(int adet = 1) {
+        public void devamsizlikArtir(int adet = 1)
+        {
             dersdevamsizliksayisi = dersdevamsizliksayisi + adet;
         }
 

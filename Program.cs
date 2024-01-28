@@ -37,7 +37,7 @@ while (true)
         //dersi ekleme ve onay alma
         Console.WriteLine("\n3.işlem:onay işlemi");
         Console.WriteLine($"Seçilen Ders:{SecilenDers.adi}\nSeçilen Tarih:{SecilenTarih.Value.ToShortDateString()}");
-        Dersdevamsizlik dersdevamsizlik = new Dersdevamsizlik(SecilenDers,Convert.ToDateTime(SecilenTarih));
+        Dersdevamsizlik dersdevamsizlik = new Dersdevamsizlik(SecilenDers,islemYap.devamsizlikSayisiGetir(SecilenDers.adi.ToLower()),Convert.ToDateTime(SecilenTarih));
         islemYap.DevamsizlikEkle(dersdevamsizlik);
         Console.ReadLine();
 
@@ -54,11 +54,11 @@ while (true)
     else if(islemTip == "4")
     {
         Console.WriteLine("Test Menü");
-        Console.WriteLine("Ders Adı|Ders Hocası|devamsızlık sayısı|devamsızlık Tarihi|");
+        Console.WriteLine("Ders Adı|Ders Hocası|devamsızlık Tarihi|");
 
         foreach (Dersdevamsizlik item in islemYap.dersdevamsizliklarigetir())
         {
-            Console.WriteLine($"{item.ders.adi}|{item.ders.hocasi}|{item.dersdevamsizliksayisi}|{item.devamsizlikTarihi.ToShortDateString()}|");
+            Console.WriteLine($"{item.ders.adi}|{item.ders.hocasi}|{item.devamsizlikTarihi.ToShortDateString()}|");
         }
         Console.ReadLine();
     }

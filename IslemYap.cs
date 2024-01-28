@@ -11,18 +11,17 @@ namespace YoklamaTutucu
     {
         private List<Dersdevamsizlik> dersDevamsizliklar = new List<Dersdevamsizlik>();
         private List<Ders> dersler = new List<Ders>();
+        private Dictionary<string,int> dersDevamsizlikSayisi = new Dictionary<string,int>();
         public IslemYap()
         {
             //programın hata vermemesi için örnek bir ders oluşturuyoruz
             //dersler.Add(new Ders("deneme","denemeoğlu"));
         }
-
-        //int devamsizlikSayisi = 0;
-        //public int devamsizlikSayisiGetir()
-        //{
-        //    return devamsizlikSayisi;
-        //}
-
+        public int devamsizlikSayisiGetir(string dersIsmi)
+        {
+            return dersDevamsizlikSayisi[dersIsmi.ToLower()];
+        }
+        //devamsızlık ekleme ile ilgili işlemler başlangıç
         public void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik) {
             //bu ders daha önceden devamsızlık olarak eklenmiş mi onu kontrol et(bu daha sonra eklenecek)
             //Devamsızlık ekleme işlemi
@@ -33,7 +32,7 @@ namespace YoklamaTutucu
             if (!(onay2 == "i" || onay2 == "İ")) {
                 //onay verildi
                 dersDevamsizlik.devamsizlikArtir();
-                //devamsizlikSayisi = dersDevamsizlik.dersdevamsizliksayisi;
+                dersDevamsizlikSayisi[dersDevamsizlik.ders.adi.ToLower()] = dersDevamsizlik.dersdevamsizliksayisi;
                 dersDevamsizliklar.Add(dersDevamsizlik);
                 Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersdevamsizliksayisi} adet devamsızlığı var");
             }
@@ -60,6 +59,7 @@ namespace YoklamaTutucu
                         //ders eklenecek
                         //(ders.adi.ToLower() == fders.adi.ToLower()) && (ders.hocasi.ToLower() != fders.hocasi.ToLower())
                         dersler.Add(ders);
+                        dersDevamsizlikSayisi.Add(ders.adi.ToLower(), 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
                         sonuc = true;
                         break;
                     }
@@ -75,6 +75,8 @@ namespace YoklamaTutucu
             {
                 //ders yok
                 dersler.Add(ders);
+                dersDevamsizlikSayisi.Add(ders.adi.ToLower(), 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
+
                 sonuc = true;
             }
             
@@ -93,5 +95,7 @@ namespace YoklamaTutucu
         {
             return dersDevamsizliklar;
         }
+        //devamsızlık ekleme ile ilgili işlemler bitiş
+
     }
 }
