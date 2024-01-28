@@ -9,27 +9,33 @@ namespace YoklamaTutucu
 {
     public class IslemYap
     {
-        private List<Dersdevamsizlik> dersDevamsizliklar;
+        private List<Dersdevamsizlik> dersDevamsizliklar = new List<Dersdevamsizlik>();
         private List<Ders> dersler = new List<Ders>();
-
         public IslemYap()
         {
             //programın hata vermemesi için örnek bir ders oluşturuyoruz
             //dersler.Add(new Ders("deneme","denemeoğlu"));
         }
 
+        //int devamsizlikSayisi = 0;
+        //public int devamsizlikSayisiGetir()
+        //{
+        //    return devamsizlikSayisi;
+        //}
+
         public void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik) {
             //bu ders daha önceden devamsızlık olarak eklenmiş mi onu kontrol et(bu daha sonra eklenecek)
             //Devamsızlık ekleme işlemi
             //kullanıcı onayı alma
 
-            Console.WriteLine($"{dersDevamsizlik.devamsizlikTarihi} tarihinde\n{dersDevamsizlik.ders.adi} adında(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersdevamsizliksayisi} adet devamsızlığınız olan(eğer eklerseniz devamsızlığınız {dersDevamsizlik.dersdevamsizliksayisi + 1 } adet olacak ) ders eklenecek\n onaylamak için herhangi bir tuşa basın(iptal için i)");
+            Console.WriteLine($"{dersDevamsizlik.devamsizlikTarihi.ToShortDateString()} tarihinde\n {dersDevamsizlik.ders.adi} adında(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersdevamsizliksayisi} adet devamsızlığınız olan(eğer eklerseniz devamsızlığınız {dersDevamsizlik.dersdevamsizliksayisi + 1 } adet olacak ) devamsızlık eklenecek\n onaylamak için herhangi bir tuşa basın(iptal için i)");
             string onay2 = Console.ReadLine();
             if (!(onay2 == "i" || onay2 == "İ")) {
                 //onay verildi
                 dersDevamsizlik.devamsizlikArtir();
+                //devamsizlikSayisi = dersDevamsizlik.dersdevamsizliksayisi;
                 dersDevamsizliklar.Add(dersDevamsizlik);
-                Console.WriteLine("devamsızlık ekleme başarılı\n şuan itibari ile\n{} dersinin(dersi veren : {ders.hocasi})\n{ders.dersdevamsizliksayisi}adet devamsızlığı var");
+                Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersdevamsizliksayisi} adet devamsızlığı var");
             }
             else
             {
@@ -82,6 +88,10 @@ namespace YoklamaTutucu
         {
         
             return dersler.Count();
+        }
+        public List<Dersdevamsizlik> dersdevamsizliklarigetir()
+        {
+            return dersDevamsizliklar;
         }
     }
 }

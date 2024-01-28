@@ -17,7 +17,7 @@ while (true)
 
         //devamsızlık Ekleme
         Console.WriteLine("Devamsızlık ekleme");
-        Console.WriteLine("Devamsızlık ekleme işlemi 3 işlemden oluşmaktadır\n1.işlem:Ders Seçimi\n2.işlem:Tarih Seçimi\n3.işlem:onay");
+        Console.WriteLine("Devamsızlık ekleme işlemi 3 işlemden oluşmaktadır\n1.işlem:Ders Seçimi\n2.işlem:Tarih Seçimi\n3.işlem:onay işlemi");
         Ders? SecilenDers;
         //ders seçimi
         SecilenDers = DersSecim();
@@ -34,8 +34,12 @@ while (true)
             //Tarih seçiminde hata var
             continue;
         }
-        Console.ReadLine();
         //dersi ekleme ve onay alma
+        Console.WriteLine("\n3.işlem:onay işlemi");
+        Console.WriteLine($"Seçilen Ders:{SecilenDers.adi}\nSeçilen Tarih:{SecilenTarih.Value.ToShortDateString()}");
+        Dersdevamsizlik dersdevamsizlik = new Dersdevamsizlik(SecilenDers,Convert.ToDateTime(SecilenTarih));
+        islemYap.DevamsizlikEkle(dersdevamsizlik);
+        Console.ReadLine();
 
     }
     else if (islemTip == "2")
@@ -46,6 +50,17 @@ while (true)
     else if (islemTip == "3")
     {
         Console.WriteLine("Tarih bazında Devamsızlık Görüntüleme");
+    }
+    else if(islemTip == "4")
+    {
+        Console.WriteLine("Test Menü");
+        Console.WriteLine("Ders Adı|Ders Hocası|devamsızlık sayısı|devamsızlık Tarihi|");
+
+        foreach (Dersdevamsizlik item in islemYap.dersdevamsizliklarigetir())
+        {
+            Console.WriteLine($"{item.ders.adi}|{item.ders.hocasi}|{item.dersdevamsizliksayisi}|{item.devamsizlikTarihi.ToShortDateString()}|");
+        }
+        Console.ReadLine();
     }
     else
     {
@@ -65,7 +80,7 @@ string girdiAl(string soruMetni)
     return kullaniciGirdisi;
 }
 
-bool emptyDataCheckForDersEkle(string kontrolverisi,string kullaniciyaSoyle)
+bool emptyDataCheckForDersEkle(string kontrolverisi, string kullaniciyaSoyle)
 {
     //eğer veride boşluk sıkıntısı varsa(boş bırakma,başındaboşluk,sonundaboşluk) true döndürür.sıkıntı yoksa false
     bool basindaBoslukVarmi = kontrolverisi.StartsWith(" ");
@@ -81,12 +96,14 @@ Ders? dersEkle()
 {
     string dersadi = girdiAl("eklenecek dersin adı");
     //empty Data Check for dersAdi Variable(dersadı değişkeni için boş veri kontrolü)
-    if (emptyDataCheckForDersEkle(dersadi, "eklencek dersin adı")) { 
+    if (emptyDataCheckForDersEkle(dersadi, "eklencek dersin adı"))
+    {
         return null;
     }
     string dersHocasi = girdiAl("dersi veren öğretim görevlisi");
     //empty Data Check for dersHocasi Variable(dersHocasi değişkeni için boş veri kontrolü)
-    if (emptyDataCheckForDersEkle(dersHocasi, "dersi veren öğretim görevlisi")) {
+    if (emptyDataCheckForDersEkle(dersHocasi, "dersi veren öğretim görevlisi"))
+    {
         return null;
     }
     Ders SecilenDers = new Ders(dersadi, dersHocasi);
@@ -113,7 +130,8 @@ Ders? DersSecim()
         {
             //yeni ders ekleme
             SecilenDers = dersEkle();
-            if (SecilenDers == null) {
+            if (SecilenDers == null)
+            {
                 Console.WriteLine("Ders Seçimi başarısız ana menüye dönmek için bir tuşa basın");
                 Console.ReadLine();
                 return null;
@@ -165,7 +183,7 @@ DateTime? TarihSecim()
 {
     //Tarih seçimi
     //Tarih seçimi başlangıç
-    Console.WriteLine("2.işlem : Tarih Seçimi");
+    Console.WriteLine("\n2.işlem : Tarih Seçimi");
     DateTime SecilenTarih;
     Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToShortDateString()}");
     Console.WriteLine($"1-Farklı Bir Tarih");
