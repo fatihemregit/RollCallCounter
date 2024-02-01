@@ -19,7 +19,7 @@ namespace YoklamaTutucu
         }
         public int devamsizlikSayisiGetir(string dersIsmi)
         {
-            return dersDevamsizlikSayisi[dersIsmi.ToLower()];
+            return dersDevamsizlikSayisi[dersIsmi];
         }
         //devamsızlık ekleme ile ilgili işlemler başlangıç
         public void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik) {
@@ -32,7 +32,7 @@ namespace YoklamaTutucu
             if (!(onay2 == "i" || onay2 == "İ")) {
                 //onay verildi
                 dersDevamsizlik.devamsizlikArtir();
-                dersDevamsizlikSayisi[dersDevamsizlik.ders.adi.ToLower()] = dersDevamsizlik.dersdevamsizliksayisi;
+                dersDevamsizlikSayisi[dersDevamsizlik.ders.adi] = dersDevamsizlik.dersdevamsizliksayisi;
                 dersDevamsizliklar.Add(dersDevamsizlik);
                 Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersdevamsizliksayisi} adet devamsızlığı var");
             }
@@ -43,7 +43,6 @@ namespace YoklamaTutucu
             }
         }
         public bool dersEkle(Ders ders) {
-            Console.WriteLine();
             //eğer ders eklenirse true,ders eklenmez ise false
             bool sonuc = false;
             //ders daha önceden var mı onu kontrol ediyoruz
@@ -57,9 +56,10 @@ namespace YoklamaTutucu
                     if (!((fders.adi.ToLower() == ders.adi.ToLower()) && (fders.hocasi.ToLower() == ders.hocasi.ToLower())))
                     {
                         //ders eklenecek
-                        //(ders.adi.ToLower() == fders.adi.ToLower()) && (ders.hocasi.ToLower() != fders.hocasi.ToLower())
+                        //(ders.adi.ToLower() == fders.adi.ToLower()) && (ders.hocasi.ToLower() != fders.hocasi.ToLower());
                         dersler.Add(ders);
-                        dersDevamsizlikSayisi.Add(ders.adi.ToLower(), 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
+                        dersDevamsizlikSayisi.Add(ders.adi, 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
+                        Console.ReadLine();
                         sonuc = true;
                         break;
                     }
@@ -75,7 +75,7 @@ namespace YoklamaTutucu
             {
                 //ders yok
                 dersler.Add(ders);
-                dersDevamsizlikSayisi.Add(ders.adi.ToLower(), 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
+                dersDevamsizlikSayisi.Add(ders.adi, 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
 
                 sonuc = true;
             }
@@ -96,6 +96,21 @@ namespace YoklamaTutucu
             return dersDevamsizliklar;
         }
         //devamsızlık ekleme ile ilgili işlemler bitiş
+
+        //devamsızlık görüntülüme(ders bazında) başlangıç
+        public List<Dersdevamsizlik> dersBazindaDevamsizlikGetir(Ders ders) {
+            List<Dersdevamsizlik> pleaseReturn = new List<Dersdevamsizlik>();
+            foreach (Dersdevamsizlik dersdevamsizlik in dersDevamsizliklar) {
+                if ((dersdevamsizlik.ders.adi == ders.adi) && (dersdevamsizlik.ders.hocasi == ders.hocasi)) {
+                    //eşleşme olumlu
+                    pleaseReturn.Add(dersdevamsizlik);
+                }
+            }
+            return pleaseReturn;
+        }
+        //devamsızlık görüntülüme(ders bazında) bitiş
+
+
 
     }
 }

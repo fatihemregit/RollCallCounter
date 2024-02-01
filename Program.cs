@@ -18,10 +18,10 @@ while (true)
         //devamsızlık Ekleme
         Console.WriteLine("Devamsızlık ekleme");
         Console.WriteLine("Devamsızlık ekleme işlemi 3 işlemden oluşmaktadır\n1.işlem:Ders Seçimi\n2.işlem:Tarih Seçimi\n3.işlem:onay işlemi");
-        Ders? SecilenDers;
+        Ders? devamszilikEklemeSecilenDers;
         //ders seçimi
-        SecilenDers = DersSecim();
-        if (SecilenDers == null)
+        devamszilikEklemeSecilenDers = DevamsizlikEklemeIslemiicinDersSecim();
+        if (devamszilikEklemeSecilenDers == null)
         {
             //ders seçiminde hata var 
             continue;
@@ -36,15 +36,38 @@ while (true)
         }
         //dersi ekleme ve onay alma
         Console.WriteLine("\n3.işlem:onay işlemi");
-        Console.WriteLine($"Seçilen Ders:{SecilenDers.adi}\nSeçilen Tarih:{SecilenTarih.Value.ToShortDateString()}");
-        Dersdevamsizlik dersdevamsizlik = new Dersdevamsizlik(SecilenDers,islemYap.devamsizlikSayisiGetir(SecilenDers.adi.ToLower()),Convert.ToDateTime(SecilenTarih));
-        islemYap.DevamsizlikEkle(dersdevamsizlik);
+        Console.WriteLine($"Seçilen Ders:{devamszilikEklemeSecilenDers.adi}\nSeçilen Tarih:{SecilenTarih.Value.ToShortDateString()}");
+        Dersdevamsizlik devamsizlikEklemeDersDevamsizlik = new Dersdevamsizlik(devamszilikEklemeSecilenDers,islemYap.devamsizlikSayisiGetir(devamszilikEklemeSecilenDers.adi),Convert.ToDateTime(SecilenTarih));
+        islemYap.DevamsizlikEkle(devamsizlikEklemeDersDevamsizlik);
         Console.ReadLine();
 
     }
     else if (islemTip == "2")
     {
         Console.WriteLine("Ders Bazında Devamsızlık Görüntüleme");
+        //eğer devamsızlık yapılan ders yoksa devamsızlık görüntülenemez
+        if (islemYap.dersdevamsizliklarigetir().Count == 0)
+        {
+            Console.WriteLine("Devamsızlık olmadığından devamsızlık görüntülenemeyiyor\n(Ana menüye dönmek için bir tuşa basın)");
+            Console.ReadLine();
+            continue;
+        }
+        Console.WriteLine("Ders Bazında Devamsızlık Görüntüleme işlemi 2 aşamadan oluşmaktadır\n1.Ders Seçimi\n2.Devamsızlık Görüntüleme\n");
+        //varolan derslerden ders seçimi
+
+        Ders? dersBazindaDevamszilikGoruntulemeSecilenDers = DersBazindaDevamsizlikGoruntulemeicinDersSecimi();
+        if (dersBazindaDevamszilikGoruntulemeSecilenDers == null) {
+            //ders seçiminde bir hata olmuş ana menüye dönülüyor
+            continue;
+        }
+        Console.WriteLine("\n2.işlem:Devamsızlık Görüntüleme");
+        Console.WriteLine("Ders Adı|Ders Hocası|Devamsızlık Tarihi");
+        foreach (Dersdevamsizlik dersBazindaDevamsizlikGoruntulemeDersDevamsizlik in islemYap.dersBazindaDevamsizlikGetir(dersBazindaDevamszilikGoruntulemeSecilenDers)) {
+            Console.WriteLine($"{dersBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.adi}|{dersBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.hocasi}|{dersBazindaDevamsizlikGoruntulemeDersDevamsizlik.devamsizlikTarihi.ToShortDateString()}");
+        }
+        Console.ReadLine();
+
+
 
     }
     else if (islemTip == "3")
@@ -54,7 +77,7 @@ while (true)
     else if(islemTip == "4")
     {
         Console.WriteLine("Test Menü");
-        Console.WriteLine("Ders Adı|Ders Hocası|devamsızlık Tarihi|");
+        Console.WriteLine("Ders Adı|Ders Hocası|Devamsızlık Tarihi|");
 
         foreach (Dersdevamsizlik item in islemYap.dersdevamsizliklarigetir())
         {
@@ -109,7 +132,35 @@ Ders? dersEkle()
     Ders SecilenDers = new Ders(dersadi, dersHocasi);
     return SecilenDers;
 }
-Ders? DersSecim()
+
+Ders? DersBazindaDevamsizlikGoruntulemeicinDersSecimi()
+{
+    Console.WriteLine("\n1.işlem:ders seçimi");
+    Ders? ders;
+    int sayac = 0;
+
+
+    foreach (Ders d in islemYap.dersleriGetir())
+    {
+        Console.WriteLine($"{sayac}-{d.adi}(dersi veren:{d.hocasi})");
+        sayac++;
+    }
+    string girdi = girdiAl("Lütfen yukarıdan numaraya göre ders seçimi yapınız");
+    try
+    {
+        int dersindex = Convert.ToInt32(girdi);
+        ders = islemYap.dersleriGetir()[dersindex];
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Hatalı seçim\n(olmayan ders seçimi veya hatalı girdi(yalnızca sayı kabul edilir)\nAna menüye dönmek için bir tuşa basın");
+        Console.ReadLine();
+        return null;
+    }
+
+    return ders;
+}
+Ders? DevamsizlikEklemeIslemiicinDersSecim()
 {
     //ders seçimi
     //ders seçimi başlangıç
