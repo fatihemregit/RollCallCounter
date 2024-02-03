@@ -3,7 +3,7 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- Ders Bazýnda Devamsýzlýk Görüntüleme sisteminin yapýlmasý
+- Tarih Bazýnda Devamsýzlýk Görüntüleme sisteminin yapýlmasý
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -27,7 +27,8 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - Devamsýzlýk ekleme sisteminin bitirilmesi ve kodda ufak düzeltmeler
 ### Gün 6 (31.01.2024)
 - Ders Bazýnda Devamsýzlýk Görüntüleme sisteminin yapýlmasý
-
+### Gün 7 (2.02.2024)
+- Tarih Bazýnda Devamsýzlýk Görüntüleme sisteminin yapýlmasý
 
 ## yapýlacaklar
 

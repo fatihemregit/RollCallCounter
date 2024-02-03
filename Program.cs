@@ -4,6 +4,7 @@
 using System;
 using YoklamaTutucu;
 using YoklamaTutucu.models;
+using static System.Net.Mime.MediaTypeNames;
 
 IslemYap islemYap = new IslemYap();
 string devamsizlikIptalBilgilendirmeYazisi = "(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)";
@@ -28,7 +29,7 @@ while (true)
         }
 
         //Tarih seçimi
-        DateTime? SecilenTarih = TarihSecim();
+        DateTime? SecilenTarih = TarihSecim(devamsizlikIptalBilgilendirmeYazisi);
         if (SecilenTarih == null)
         {
             //Tarih seçiminde hata var
@@ -60,6 +61,7 @@ while (true)
             //ders seçiminde bir hata olmuş ana menüye dönülüyor
             continue;
         }
+        // Devamsızlık görüntüleme işlemi
         Console.WriteLine("\n2.işlem:Devamsızlık Görüntüleme");
         Console.WriteLine("Ders Adı|Ders Hocası|Devamsızlık Tarihi");
         foreach (Dersdevamsizlik dersBazindaDevamsizlikGoruntulemeDersDevamsizlik in islemYap.dersBazindaDevamsizlikGetir(dersBazindaDevamszilikGoruntulemeSecilenDers)) {
@@ -73,6 +75,28 @@ while (true)
     else if (islemTip == "3")
     {
         Console.WriteLine("Tarih bazında Devamsızlık Görüntüleme");
+        //eğer devamsızlık yapılan ders yoksa devamsızlık görüntülenemez
+        if (islemYap.dersdevamsizliklarigetir().Count == 0)
+        {
+            Console.WriteLine("Devamsızlık olmadığından devamsızlık görüntülenemeyiyor\n(Ana menüye dönmek için bir tuşa basın)");
+            Console.ReadLine();
+            continue;
+        }
+        Console.WriteLine("Tarih Bazında Devamsızlık Görüntüleme işlemi 2 aşamadan oluşmaktadır\n1.Tarih Seçimi\n2.Devamsızlık Görüntüleme\n");
+        //tarih Seçimi
+        DateTime? tarihbazindaDevamsizlikGoruntulemeSecilenTarih = TarihSecim("(Tarih Bazında Devamsızlık Görüntüleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)","1.işlem:Tarih Seçimi");
+        if (tarihbazindaDevamsizlikGoruntulemeSecilenTarih == null) {
+            //tarih seçiminde bir hata olmuş ana menüye dönülüyor
+            continue;
+        }
+        // Devamsızlık görüntüleme işlemi
+        Console.WriteLine("\n2.işlem:Devamsızlık Görüntüleme");
+        Console.WriteLine("Ders Adı|Ders Hocası|Devamsızlık Tarihi");
+        foreach (Dersdevamsizlik tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik in islemYap.tarihBazindaDevamsizlikGetir(Convert.ToDateTime(tarihbazindaDevamsizlikGoruntulemeSecilenTarih))) {
+            Console.WriteLine($"{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.adi}|{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.hocasi}|{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.devamsizlikTarihi.ToShortDateString()}");
+        }
+        Console.ReadLine();
+
     }
     else if(islemTip == "4")
     {
@@ -84,6 +108,10 @@ while (true)
             Console.WriteLine($"{item.ders.adi}|{item.ders.hocasi}|{item.devamsizlikTarihi.ToShortDateString()}|");
         }
         Console.ReadLine();
+    }
+    else if (islemTip == "5") {
+        Console.WriteLine("çıkış yapılıyor");
+        Environment.Exit(0);
     }
     else
     {
@@ -230,11 +258,14 @@ Ders? DevamsizlikEklemeIslemiicinDersSecim()
     //ders seçimi bitiş
     return SecilenDers;
 }
-DateTime? TarihSecim()
+
+
+
+DateTime? TarihSecim(string iptalBilgilendirmeYazisi, string islemBilgilendirmeYazisi = "2.işlem : Tarih Seçimi")
 {
     //Tarih seçimi
     //Tarih seçimi başlangıç
-    Console.WriteLine("\n2.işlem : Tarih Seçimi");
+    Console.WriteLine($"\n{islemBilgilendirmeYazisi}");
     DateTime SecilenTarih;
     Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToShortDateString()}");
     Console.WriteLine($"1-Farklı Bir Tarih");
@@ -255,14 +286,14 @@ DateTime? TarihSecim()
         if (!(DateTime.TryParse(Console.ReadLine(), out kullanicininGirdigiTarih)))
         {
             //tarih seçim işlemi başarısız
-            Console.WriteLine($"tarih girişi başarısız\n{devamsizlikIptalBilgilendirmeYazisi}");
+            Console.WriteLine($"tarih girişi başarısız\n{iptalBilgilendirmeYazisi}");
             Console.ReadLine();
             return null;
         }
 
         if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString()))
         {
-            Console.WriteLine($"Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n{devamsizlikIptalBilgilendirmeYazisi}");
+            Console.WriteLine($"Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n{iptalBilgilendirmeYazisi}");
             Console.ReadLine();
             return null;
         }
@@ -270,7 +301,7 @@ DateTime? TarihSecim()
     }
     else
     {
-        Console.WriteLine($"geçersiz işlem\n{devamsizlikIptalBilgilendirmeYazisi}");
+        Console.WriteLine($"geçersiz işlem\n{iptalBilgilendirmeYazisi}");
         Console.ReadLine();
         return null;
     }

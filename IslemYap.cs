@@ -59,7 +59,7 @@ namespace YoklamaTutucu
                         //(ders.adi.ToLower() == fders.adi.ToLower()) && (ders.hocasi.ToLower() != fders.hocasi.ToLower());
                         dersler.Add(ders);
                         dersDevamsizlikSayisi.Add(ders.adi, 0); // burayı daha sonra düzeltme ihtiyacı doğabilir
-                        Console.ReadLine();
+                        //Console.ReadLine();//buraya bir bak
                         sonuc = true;
                         break;
                     }
@@ -99,17 +99,31 @@ namespace YoklamaTutucu
 
         //devamsızlık görüntülüme(ders bazında) başlangıç
         public List<Dersdevamsizlik> dersBazindaDevamsizlikGetir(Ders ders) {
-            List<Dersdevamsizlik> pleaseReturn = new List<Dersdevamsizlik>();
+            List<Dersdevamsizlik> devamsizlikListesi = new List<Dersdevamsizlik>();
             foreach (Dersdevamsizlik dersdevamsizlik in dersDevamsizliklar) {
                 if ((dersdevamsizlik.ders.adi == ders.adi) && (dersdevamsizlik.ders.hocasi == ders.hocasi)) {
                     //eşleşme olumlu
-                    pleaseReturn.Add(dersdevamsizlik);
+                    devamsizlikListesi.Add(dersdevamsizlik);
                 }
             }
-            return pleaseReturn;
+            return devamsizlikListesi;
         }
         //devamsızlık görüntülüme(ders bazında) bitiş
 
+        //devamsızlık görüntüleme (tarih bazında) başlangıç
+        public List<Dersdevamsizlik> tarihBazindaDevamsizlikGetir(DateTime tarih)
+        {
+            List<Dersdevamsizlik> devamsizlikListesi = new List<Dersdevamsizlik>();
+            foreach (Dersdevamsizlik dersdevamsizlik in dersDevamsizliklar)
+            {
+                if (dersdevamsizlik.devamsizlikTarihi.ToShortDateString() == tarih.ToShortDateString()) { 
+                    //eşleşme sağlandı
+                    devamsizlikListesi.Add(dersdevamsizlik);
+                }
+            }
+            return devamsizlikListesi;
+        }
+        //devamsızlık görüntüleme (tarih bazında) bitiş
 
 
     }
