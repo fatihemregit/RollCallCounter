@@ -8,8 +8,8 @@ namespace YoklamaTutucu.models
 {
     public  class Ders
     {
-        public string adi;
-        public string hocasi;
+        public string adi { get; set; }
+        public string hocasi { get; set; }
 
         public Ders(string adi, string hocasi)
         {

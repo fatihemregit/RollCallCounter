@@ -8,20 +8,20 @@ namespace YoklamaTutucu.models
 {
     public class Dersdevamsizlik
     {
-        public Ders ders;
+        public Ders ders { get; set; }
 
-        public int dersdevamsizliksayisi;
+        public int dersDevamsizlikSayisi { get; set; }
 
-        public DateTime devamsizlikTarihi;
+        public DateTime devamsizlikTarihi { get; set;}
         public Dersdevamsizlik(Ders ders,int dersdevamsizliksayisi, DateTime devamsizlikTarihi)
         {
             this.ders = ders;
             this.devamsizlikTarihi = devamsizlikTarihi;
-            this.dersdevamsizliksayisi = dersdevamsizliksayisi;
+            this.dersDevamsizlikSayisi = dersdevamsizliksayisi;
         }
         public void devamsizlikArtir(int adet = 1)
         {
-            dersdevamsizliksayisi = dersdevamsizliksayisi + adet;
+            dersDevamsizlikSayisi = dersDevamsizlikSayisi + adet;
         }
 
 

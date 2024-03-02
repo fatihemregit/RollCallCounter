@@ -31,7 +31,12 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - Tarih Bazýnda Devamsýzlýk Görüntüleme sisteminin yapýlmasý
 
 ## yapýlacaklar
-
+proje dotnet sürüm yükseltmesi(net 6.0 => net 8.0)(yapýldý)
+projenin veritabaný iþlemleri için uygun hale getirilmesi(IslemYap.cs dosyasýnýn interface sistemine çevirilmesi)(yapýldý)
+projenin veritabaný iþlemleri için uygun hale getirilmesi(Dto Modellerinin oluþturulmasý)(yapýldý)
+projenin veritabaný iþlemleri için gerekli kütüphanelerin yüklenmesi(ef core,ef core tools,postgresql)
+genel kod düzeltmeleri(class prop düzeltmeleri(ders.cs,Dersdevamsizlik.cs))(yapýldý)
+genel kod düzeltmeleri(IslemYapInMemory(eski adýyla IslemYap.cs) classsýndaki dersBazindaDevamsizlikGetir ve tarihBazindaDevamsizlikGetir fonksiyonlarýnýn kýsaltýlmasý(linq where metodu))(yapýldý)
 ## kendi notlarým
 
 # projeden kendime çýkarýmlarým

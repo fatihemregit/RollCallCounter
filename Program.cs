@@ -6,7 +6,10 @@ using YoklamaTutucu;
 using YoklamaTutucu.models;
 using static System.Net.Mime.MediaTypeNames;
 
-IslemYap islemYap = new IslemYap();
+
+
+
+IIslemYap islemYap = new IslemYapInMemory();
 string devamsizlikIptalBilgilendirmeYazisi = "(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)";
 while (true)
 {
