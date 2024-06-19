@@ -17,7 +17,7 @@ public class IslemYapInMemory:IIslemYap
         //programın hata vermemesi için örnek bir ders oluşturuyoruz
         //dersler.Add(new Ders("deneme","denemeoğlu"));
     }
-    public int devamsizlikSayisiGetir(string dersIsmi = "",int dersId=0)
+    public int devamsizlikSayisiGetir(string dersIsmi = "")
     {
         return dersDevamsizlikSayisi[dersIsmi];
     }
@@ -43,7 +43,7 @@ public class IslemYapInMemory:IIslemYap
             Console.WriteLine("devamsızlık eklenmedi");
         }
     }
-    public void dersEkle(Ders ders) {
+    public bool dersEkle(Ders ders) {
         //eğer ders eklenirse true,ders eklenmez ise false
         bool sonuc = false;
         //ders daha önceden var mı onu kontrol ediyoruz
@@ -52,8 +52,9 @@ public class IslemYapInMemory:IIslemYap
         //TODO burayı daha sonra test et hata çıkma potansiyeli var
         if (dersSayisi() > 0) {
             //ders var
-            foreach (Ders fders in dersler) //tam olarak burada hata veriyor
+            foreach (Ders fders in dersler) 
             {
+                //kullanıcı aynı dersi tekrardan eklemeye çalışyor mu onun kontrolü
                 if (!((fders.adi.ToLower() == ders.adi.ToLower()) && (fders.hocasi.ToLower() == ders.hocasi.ToLower())))
                 {
                     //ders eklenecek
@@ -80,7 +81,7 @@ public class IslemYapInMemory:IIslemYap
 
             sonuc = true;
         }
-        //return sonuc;
+        return sonuc;
     }
     public List<Ders> dersleriGetir()
     {
@@ -137,6 +138,11 @@ public class IslemYapInMemory:IIslemYap
         //eski yöntem bitiş
     }
     //devamsızlık görüntüleme (tarih bazında) bitiş
+
+    public string veriBarindirmaTuru()
+    {
+        return "In memory";
+    }
 
 
 }

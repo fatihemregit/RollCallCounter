@@ -9,10 +9,11 @@ namespace YoklamaTutucu;
 
 public interface IIslemYap
 {
-    int devamsizlikSayisiGetir(string dersIsmi = "", int dersId = 0);
+    string veriBarindirmaTuru();
+    int devamsizlikSayisiGetir(string dersIsmi = "");
     void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik);
 
-    void dersEkle(Ders ders);
+    bool dersEkle(Ders ders);
 
     List<Ders> dersleriGetir();
 
