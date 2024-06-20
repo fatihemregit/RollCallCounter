@@ -3,15 +3,7 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- proje mimarisinin deðiþtirilmesi (
-3 layer app (
-business,
-data acesss,
-presentation
-) 
-)
-- IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþtýrýlmasý(iþ kurallarýnýn silinip sadece veri ekleme kodlarýnýn býrakýlmasý ve ayrýþtýrýlan iþ kurallarýnýn IslemYapInMemoryManager dosyasýna yazýlmasý)
-- IIslemYapManager dosyasýnýn kodlanmasý
+- projenin veritabaný iþlemlerinin yeni mimariye uygun hale getirilmesi
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -51,14 +43,17 @@ presentation
 - proje mimarisinin deðiþtirlmesi
 - IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþtýrýlmasý
 - IIslemYapManager dosyasýnýn kodlanmasý
+- projenin veritabaný iþlemlerinin yeni mimariye uygun hale getirilmesi
 ## yapýlacaklar
 dersdevamsizliklarigetir fonksiyonu hata veriyor onu düzelt (IslemYapInDatabase)
 
 projedeki veritabanlý sistemde tarih seçimi hatasýnýn düzeltilmesi
-ders seçiminde varolan ders eklenirse engelleme
+ders seçiminde varolan ders eklenirse engelleme(yapýldý)
 
 
 genel kod düzeltmeleri
+
+
 
 
 ## kendi notlarým

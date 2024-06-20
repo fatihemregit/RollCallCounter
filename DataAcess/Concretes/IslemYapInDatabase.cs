@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -21,7 +22,6 @@ public class IslemYapInDatabase : IIslemYap
     public IslemYapInDatabase()
     {
         db = new DersDtoContextAndDersdevamsizlikDtoContext();
-
         tumVerileriSil();
         db.SaveChanges();
 
@@ -75,23 +75,16 @@ public class IslemYapInDatabase : IIslemYap
     {
         //bu fonksiyon
         List<Dersdevamsizlik> dersdevamsizliklar = new List<Dersdevamsizlik>();
-        Console.WriteLine($"devammmsızlık {db.devamsizliklar.Count()}");
         if (db.devamsizliklar.Count() <= 0 || db.devamsizliklar == null)
         {
+            Console.WriteLine($"null mu ? {db.devamsizliklar == null}");
             //veritabanında veri yok;
             return dersdevamsizliklar;
         }
         //mapping
-        List<DersdevamsizlikDto> dersdevamsizlikDtos = db.devamsizliklar.ToList();
+        List<DersdevamsizlikDto> dersdevamsizlikDtos = db.devamsizliklar.Include(d => d.Ders).ToList();
         foreach (DersdevamsizlikDto dersdevamsizlikDto in dersdevamsizlikDtos)
         {
-            //aşağıdaki satır hata veriyor
-            /*Hata
-             System.NullReferenceException: 'Object reference not set to an instance of an object.'
-
-YoklamaTutucu.DersdevamsizlikDto.Ders.get, null döndürdü.
-
-             */
             Ders ders1 = new Ders(dersdevamsizlikDto.Ders.DersAdi, dersdevamsizlikDto.Ders.DersOgretimGorevlisiAdi);
             Dersdevamsizlik dersdevamsizlik = new Dersdevamsizlik(ders1, dersdevamsizlikDto.DevamsizlikSayisi, dersdevamsizlikDto.devamsizlikTarihi);
             dersdevamsizliklar.Add(dersdevamsizlik);
@@ -101,7 +94,7 @@ YoklamaTutucu.DersdevamsizlikDto.Ders.get, null döndürdü.
 
     public bool dersEkle(Ders ders)
     {
-        //fonksiyon test için böyle yazıldı lütfen düzelt
+
         db.dersler.Add(new DersDto() { DersAdi = ders.adi, DersOgretimGorevlisiAdi = ders.hocasi });
         db.SaveChanges();
         return true;
@@ -153,7 +146,7 @@ YoklamaTutucu.DersdevamsizlikDto.Ders.get, null döndürdü.
 
     public int devamsizlikSayisiGetir(string dersIsmi = "")
     {
-        if (db.devamsizliklar.Where(dersdevamsizlikDto => dersdevamsizlikDto.Ders.DersAdi == dersIsmi) == null)
+        if (db.devamsizliklar.Where(dersdevamsizlikDto => dersdevamsizlikDto.Ders.DersAdi.ToLower() == dersIsmi.ToLower()) == null)
         {
             return 0;
         }
@@ -212,6 +205,8 @@ public class DersDtoContextAndDersdevamsizlikDtoContext : DbContext
     public DbSet<DersDto> dersler { get; set; }
     public DbSet<DersdevamsizlikDto> devamsizliklar { get; set; }
 
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DersdevamsizlikDto>()
@@ -248,6 +243,7 @@ public class DersdevamsizlikDto
 
     public int DevamsizlikSayisi { get; set; }
 
+    [Column(TypeName = "Date")]
     public DateTime devamsizlikTarihi { get; set; }
 
 

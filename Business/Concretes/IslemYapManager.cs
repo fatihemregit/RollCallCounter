@@ -4,26 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YoklamaTutucu.Business.Abstracts;
+using YoklamaTutucu.DataAcess.Abstracts;
 using YoklamaTutucu.DataAcess.Concretes;
 using YoklamaTutucu.models;
 
 namespace YoklamaTutucu.Business.Concretes;
 
-internal class IslemYapInMemoryManager : IIslemYapManager
+internal class IslemYapManager : IIslemYapManager
 {
 
-    private IslemYapInMemory islemYap = new IslemYapInMemory();
+    private IIslemYap _islemYap = new IslemYapInDatabase();
 
+    public IslemYapManager(IIslemYap islemYap)
+    {
+        _islemYap = islemYap;
+    }
 
     public int devamsizlikSayisiGetir(string dersIsmi = "")
     {
-        return islemYap.devamsizlikSayisiGetir(dersIsmi);
+        return _islemYap.devamsizlikSayisiGetir(dersIsmi);
     }
     public void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik)
     {
         //bu ders daha önceden devamsızlık olarak eklenmiş mi onu kontrol et(bu daha sonra eklenecek)
-        islemYap.DevamsizlikEkle(dersDevamsizlik);
-        Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersDevamsizlikSayisi} adet devamsızlığı var");
+        _islemYap.DevamsizlikEkle(dersDevamsizlik);
+        Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersDevamsizlikSayisi + 1} adet devamsızlığı var");
 
     }
 
@@ -47,7 +52,7 @@ internal class IslemYapInMemoryManager : IIslemYapManager
             if (dersvarmi == null)
             {
                 //ders eklenecek
-                islemYap.dersEkle(ders);
+                _islemYap.dersEkle(ders);
                 sonuc = true;
             }
             else
@@ -76,7 +81,7 @@ internal class IslemYapInMemoryManager : IIslemYapManager
         {
             //kayıtlı ders yok
             //ders eklenecek
-            islemYap.dersEkle(ders);
+            _islemYap.dersEkle(ders);
             sonuc = true;
         }
         
@@ -85,33 +90,33 @@ internal class IslemYapInMemoryManager : IIslemYapManager
 
     public List<Ders> dersleriGetir()
     {
-        return islemYap.dersleriGetir();
+        return _islemYap.dersleriGetir();
     }
 
     public int dersSayisi()
     {
-       return islemYap.dersSayisi();
+       return _islemYap.dersSayisi();
     }
 
 
     public List<Dersdevamsizlik> dersdevamsizliklarigetir()
     {
-        return islemYap.dersdevamsizliklarigetir();
+        return _islemYap.dersdevamsizliklarigetir();
     }
 
 
     public List<Dersdevamsizlik> dersBazindaDevamsizlikGetir(Ders ders)
     {
-        return islemYap.dersBazindaDevamsizlikGetir(ders);
+        return _islemYap.dersBazindaDevamsizlikGetir(ders);
     }
     public List<Dersdevamsizlik> tarihBazindaDevamsizlikGetir(DateTime tarih)
     {
-        return islemYap.tarihBazindaDevamsizlikGetir(tarih);
+        return _islemYap.tarihBazindaDevamsizlikGetir(tarih);
     }
 
     public string veriBarindirmaTuru()
     {
-        return islemYap.veriBarindirmaTuru();
+        return _islemYap.veriBarindirmaTuru();
     }
 
 

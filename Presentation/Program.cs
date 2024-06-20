@@ -3,6 +3,7 @@
 //main function codes start
 using System;
 using YoklamaTutucu;
+using YoklamaTutucu.Business.Abstracts;
 using YoklamaTutucu.Business.Concretes;
 using YoklamaTutucu.DataAcess.Abstracts;
 using YoklamaTutucu.DataAcess.Concretes;
@@ -13,7 +14,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 
 //IIslemYap islemYap = new IslemYapInMemory();
-IslemYapInMemoryManager islemYap = new IslemYapInMemoryManager();
+IIslemYapManager islemYap = new IslemYapManager(new IslemYapInDatabase());
+//IslemYapInDatabase islemYap = new IslemYapInDatabase();
 string devamsizlikIptalBilgilendirmeYazisi = "(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)";
 bool teksefer = true;
 while (true)
