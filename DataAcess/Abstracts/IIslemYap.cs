@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YoklamaTutucu.models;
 
-namespace YoklamaTutucu;
+namespace YoklamaTutucu.DataAcess.Abstracts;
 
 public interface IIslemYap
 {

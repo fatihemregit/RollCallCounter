@@ -5,9 +5,10 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using YoklamaTutucu.DataAcess.Abstracts;
 using YoklamaTutucu.models;
 
-namespace YoklamaTutucu;
+namespace YoklamaTutucu.DataAcess.Concretes;
 
 
 
@@ -59,7 +60,7 @@ public class IslemYapInDatabase : IIslemYap
             //veritabanında veri yok;
             return dersdevamsizliklar;
         }
-        List<DersdevamsizlikDto> dersdevamsizlikDtos = db.devamsizliklar.Where(dersdevamsizlikDto => (dersdevamsizlikDto.Ders.DersAdi == ders.adi) && (dersdevamsizlikDto.Ders.DersOgretimGorevlisiAdi == ders.hocasi)).ToList();
+        List<DersdevamsizlikDto> dersdevamsizlikDtos = db.devamsizliklar.Where(dersdevamsizlikDto => dersdevamsizlikDto.Ders.DersAdi == ders.adi && dersdevamsizlikDto.Ders.DersOgretimGorevlisiAdi == ders.hocasi).ToList();
         //mapping
         foreach (DersdevamsizlikDto dersdevamsizlikDto in dersdevamsizlikDtos)
         {
@@ -75,7 +76,7 @@ public class IslemYapInDatabase : IIslemYap
         //bu fonksiyon
         List<Dersdevamsizlik> dersdevamsizliklar = new List<Dersdevamsizlik>();
         Console.WriteLine($"devammmsızlık {db.devamsizliklar.Count()}");
-        if ((db.devamsizliklar.Count() <= 0) || (db.devamsizliklar == null))
+        if (db.devamsizliklar.Count() <= 0 || db.devamsizliklar == null)
         {
             //veritabanında veri yok;
             return dersdevamsizliklar;
@@ -133,7 +134,7 @@ YoklamaTutucu.DersdevamsizlikDto.Ders.get, null döndürdü.
     {
         //fonksiyon test için böyle yazıldı lütfen düzelt
         //ders tablosuna çift kayıt olunca engellemek için çeşitli işlemler
-        DersDto dersDto = db.dersler.FirstOrDefault(fdersDto => (fdersDto.DersAdi == dersDevamsizlik.ders.adi) && (fdersDto.DersOgretimGorevlisiAdi == dersDevamsizlik.ders.hocasi));
+        DersDto dersDto = db.dersler.FirstOrDefault(fdersDto => fdersDto.DersAdi == dersDevamsizlik.ders.adi && fdersDto.DersOgretimGorevlisiAdi == dersDevamsizlik.ders.hocasi);
         if (dersDto == null)
         {
             // ders eklenmemiş

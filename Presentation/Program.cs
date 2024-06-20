@@ -3,13 +3,17 @@
 //main function codes start
 using System;
 using YoklamaTutucu;
+using YoklamaTutucu.Business.Concretes;
+using YoklamaTutucu.DataAcess.Abstracts;
+using YoklamaTutucu.DataAcess.Concretes;
 using YoklamaTutucu.models;
 using static System.Net.Mime.MediaTypeNames;
 
 
 
 
-IIslemYap islemYap = new IslemYapInMemory();
+//IIslemYap islemYap = new IslemYapInMemory();
+IslemYapInMemoryManager islemYap = new IslemYapInMemoryManager();
 string devamsizlikIptalBilgilendirmeYazisi = "(devamsızlık ekleme işlemi iptal edildi ana menüye dönmek için bir tuşa basın)";
 bool teksefer = true;
 while (true)
@@ -47,8 +51,28 @@ while (true)
         //dersi ekleme ve onay alma
         Console.WriteLine("\n3.işlem:onay işlemi");
         Console.WriteLine($"Seçilen Ders:{devamszilikEklemeSecilenDers.adi}\nSeçilen Tarih:{SecilenTarih.Value.ToShortDateString()}");
-        Dersdevamsizlik devamsizlikEklemeDersDevamsizlik = new Dersdevamsizlik(devamszilikEklemeSecilenDers, islemYap.devamsizlikSayisiGetir(devamszilikEklemeSecilenDers.adi), Convert.ToDateTime(SecilenTarih).ToUniversalTime());
-        islemYap.DevamsizlikEkle(devamsizlikEklemeDersDevamsizlik);
+        Dersdevamsizlik devamsizlikEklemeDersDevamsizlik = new Dersdevamsizlik(devamszilikEklemeSecilenDers, islemYap.devamsizlikSayisiGetir(devamszilikEklemeSecilenDers.adi), Convert.ToDateTime(SecilenTarih));
+        //onay işlemini buraya taşıyalım
+
+        Console.WriteLine($"{devamsizlikEklemeDersDevamsizlik.devamsizlikTarihi.ToShortDateString()} tarihinde\n {devamsizlikEklemeDersDevamsizlik.ders.adi} adında(dersi veren : {devamsizlikEklemeDersDevamsizlik.ders.hocasi})\n{devamsizlikEklemeDersDevamsizlik.dersDevamsizlikSayisi} adet devamsızlığınız olan(eğer eklerseniz devamsızlığınız {devamsizlikEklemeDersDevamsizlik.dersDevamsizlikSayisi + 1} adet olacak ) devamsızlık eklenecek\n onaylamak için herhangi bir tuşa basın(iptal için i)");
+
+        string onay = Console.ReadLine();
+
+        if ((onay.ToLower() != "i"))
+        {
+            //onay verildi
+            islemYap.DevamsizlikEkle(devamsizlikEklemeDersDevamsizlik);
+        }
+        else
+        {
+            //onay verilmedi
+            Console.WriteLine(devamsizlikIptalBilgilendirmeYazisi);
+            Console.ReadLine();
+            continue;
+        }
+
+
+
         Console.ReadLine();
 
     }
@@ -110,7 +134,7 @@ while (true)
         // Devamsızlık görüntüleme işlemi
         Console.WriteLine("\n2.işlem:Devamsızlık Görüntüleme");
         Console.WriteLine("Ders Adı|Ders Hocası|Devamsızlık Tarihi");
-        foreach (Dersdevamsizlik tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik in islemYap.tarihBazindaDevamsizlikGetir(Convert.ToDateTime(tarihbazindaDevamsizlikGoruntulemeSecilenTarih).ToUniversalTime()))
+        foreach (Dersdevamsizlik tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik in islemYap.tarihBazindaDevamsizlikGetir(Convert.ToDateTime(tarihbazindaDevamsizlikGoruntulemeSecilenTarih)))
         {
             Console.WriteLine($"{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.adi}|{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.ders.hocasi}|{tarihBazindaDevamsizlikGoruntulemeDersDevamsizlik.devamsizlikTarihi.ToShortDateString()}");
         }
@@ -143,6 +167,44 @@ while (true)
         Console.ReadLine();
 
     }
+    else if (islemTip == "7")
+    {
+        Console.WriteLine("onay test (i ye basın)");
+        string onay = Console.ReadLine();
+        Console.WriteLine($"i küçük {onay.ToLower() == "i"} \ni büyük {onay.ToUpper() == "İ"}");
+        Console.ReadLine();
+
+    }
+    else if (islemTip == "8")
+    {
+        Console.WriteLine("datetime test");
+        Console.WriteLine(DateTime.Now);
+        Console.ReadLine();
+
+    }
+    else if (islemTip == "9")
+    {
+        Console.WriteLine("linq null test");
+        List<string> mystrings = new List<string>()
+        {
+            "abc",
+            "def",
+            "ghi",
+        };
+
+        var stringim = (from s in mystrings
+                        where s == "xyt"
+                        select s
+                        ).SingleOrDefault();
+        if (stringim is null)
+        {
+            Console.WriteLine("evet");
+        }
+        Console.ReadLine();
+
+
+    }
+
 
     else
     {
@@ -315,15 +377,17 @@ DateTime? TarihSecim(string iptalBilgilendirmeYazisi, string islemBilgilendirmeY
     //Tarih seçimi başlangıç
     Console.WriteLine($"\n{islemBilgilendirmeYazisi}");
     DateTime SecilenTarih;
-    Console.WriteLine($"0-Bugünün Tarihi : {DateTime.Now.ToUniversalTime().ToShortDateString()}");
+    string bugununTarihi = DateTime.Now.ToShortDateString();
+    Console.WriteLine($"0-Bugünün Tarihi : {bugununTarihi}");
     Console.WriteLine($"1-Farklı Bir Tarih");
     Console.WriteLine("Lütfen yukarıdan numaraya göre tarih seçimi yapınız");
     String girdi2 = Console.ReadLine();
     if (girdi2 == "0")
     {
         //seçilen tarih bugünün tarihi
-        Console.WriteLine($"Bugünün Tarihi({DateTime.Now.ToUniversalTime().ToShortDateString()}) ni seçtiniz ");
-        SecilenTarih = Convert.ToDateTime(DateTime.Now.ToUniversalTime().ToShortDateString());
+        Console.WriteLine($"Bugünün Tarihi({bugununTarihi}) ni seçtiniz ");
+        //burayı datetime now yaptım asıl değeri
+        SecilenTarih = Convert.ToDateTime(bugununTarihi);
     }
     else if (girdi2 == "1")
     {
@@ -339,13 +403,13 @@ DateTime? TarihSecim(string iptalBilgilendirmeYazisi, string islemBilgilendirmeY
             return null;
         }
 
-        if (kullanicininGirdigiTarih > Convert.ToDateTime(DateTime.Now.ToShortDateString()))
+        if (kullanicininGirdigiTarih > Convert.ToDateTime(bugununTarihi))
         {
             Console.WriteLine($"Girdiğiniz tarih bugünden sonraki bir tarih olamaz\n{iptalBilgilendirmeYazisi}");
             Console.ReadLine();
             return null;
         }
-        SecilenTarih = kullanicininGirdigiTarih.ToUniversalTime();
+        SecilenTarih = Convert.ToDateTime(kullanicininGirdigiTarih.ToShortDateString());
     }
     else
     {

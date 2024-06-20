@@ -3,12 +3,15 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- proje dotnet sürüm yükseltmesi(net 6.0 => net 8.0)
-- projenin veritabaný iþlemleri için uygun hale getirilmesi(IslemYap.cs dosyasýnýn interface sistemine çevirilmesi)
-- projenin veritabaný iþlemleri için uygun hale getirilmesi(Dto Modellerinin oluþturulmasý)
-- projenin veritabaný iþlemleri için gerekli kütüphanelerin yüklenmesi(ef core,ef core tools,postgresql)
-- genel kod düzeltmeleri(class prop düzeltmeleri(ders.cs,Dersdevamsizlik.cs))
-- genel kod düzeltmeleri(IslemYapInMemory(eski adýyla IslemYap.cs) classsýndaki dersBazindaDevamsizlikGetir ve tarihBazindaDevamsizlikGetir fonksiyonlarýnýn kýsaltýlmasý(linq where metodu))
+- proje mimarisinin deðiþtirlmesi (
+3 layer app (
+business,
+data acesss,
+presentation
+) 
+)
+- IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþýtýrýlmasý(iþ kurallarýnýn silinip sadece veri ekleme kodlarýnýn býrakýlmasý ve ayrýþtýrýlan iþ kurallarýnýn IslemYapInMemoryManager dosyasýna yazýlmasý)
+- IIslemYapManager dosyasýnýn kodlanmasý
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -49,6 +52,11 @@ dersdevamsizliklarigetir fonksiyonu hata veriyor onu düzelt (IslemYapInDatabase)
 
 projedeki veritabanlý sistemde tarih seçimi hatasýnýn düzeltilmesi
 ders seçiminde varolan ders eklenirse engelleme
+
+
+genel kod düzeltmeleri
+
+
 ## kendi notlarým
 
 # projeden kendime çýkarýmlarým
