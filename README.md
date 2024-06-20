@@ -3,14 +3,14 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- proje mimarisinin deðiþtirlmesi (
+- proje mimarisinin deðiþtirilmesi (
 3 layer app (
 business,
 data acesss,
 presentation
 ) 
 )
-- IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþýtýrýlmasý(iþ kurallarýnýn silinip sadece veri ekleme kodlarýnýn býrakýlmasý ve ayrýþtýrýlan iþ kurallarýnýn IslemYapInMemoryManager dosyasýna yazýlmasý)
+- IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþtýrýlmasý(iþ kurallarýnýn silinip sadece veri ekleme kodlarýnýn býrakýlmasý ve ayrýþtýrýlan iþ kurallarýnýn IslemYapInMemoryManager dosyasýna yazýlmasý)
 - IIslemYapManager dosyasýnýn kodlanmasý
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
@@ -45,8 +45,12 @@ presentation
 - genel kod düzeltmeleri(class prop düzeltmeleri(ders.cs,Dersdevamsizlik.cs))(yapýldý)
 - genel kod düzeltmeleri(IslemYapInMemory(eski adýyla IslemYap.cs) classsýndaki dersBazindaDevamsizlikGetir ve tarihBazindaDevamsizlikGetir fonksiyonlarýnýn kýsaltýlmasý(linq where metodu))(yapýldý)
 ## Gün 9 (3.03.2024)
-projenin veritabaný iþlemlerinin yazýlmasý(IslemYapInDatabase classýnýn doldurulmasý)(yapýldý)(yapana kadar caným çýktý sebebi ise veritabanýný mimarisini yanlýþ kurgulamýþým onu düzelttim)
+- projenin veritabaný iþlemlerinin yazýlmasý(IslemYapInDatabase classýnýn doldurulmasý)(yapýldý)(yapana kadar caným çýktý sebebi ise veritabanýný mimarisini yanlýþ kurgulamýþým onu düzelttim)
 
+## Gün 10 (20.06.2024)
+- proje mimarisinin deðiþtirlmesi
+- IslemYapInMemory dosyasýndaki iþ kurallarýnýn ayrýþtýrýlmasý
+- IIslemYapManager dosyasýnýn kodlanmasý
 ## yapýlacaklar
 dersdevamsizliklarigetir fonksiyonu hata veriyor onu düzelt (IslemYapInDatabase)
 
