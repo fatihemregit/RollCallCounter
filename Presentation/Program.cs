@@ -203,8 +203,26 @@ while (true)
             Console.WriteLine("evet");
         }
         Console.ReadLine();
+    }
+
+    else if (islemTip == "10")
+    {
+        Console.WriteLine(" reference contains test");
+
+        List<Ders> containtest = new List<Ders>()
+        {
+
+            new Ders("deneme","fatih"),
+            new Ders("internet","samet")
+
+        };
+
+        if (containtest.Contains(new Ders("deneme","fatih"))){
+            Console.WriteLine("evet contains doğru");
+        }
 
 
+        Console.ReadLine();
     }
 
 

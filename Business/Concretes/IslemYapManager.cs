@@ -26,6 +26,8 @@ internal class IslemYapManager : IIslemYapManager
     }
     public void DevamsizlikEkle(Dersdevamsizlik dersDevamsizlik)
     {
+
+
         //bu ders daha önceden devamsızlık olarak eklenmiş mi onu kontrol et(bu daha sonra eklenecek)
         _islemYap.DevamsizlikEkle(dersDevamsizlik);
         Console.WriteLine($"devamsızlık ekleme başarılı\n şuan itibari ile\n{dersDevamsizlik.ders.adi} dersinin(dersi veren : {dersDevamsizlik.ders.hocasi})\n{dersDevamsizlik.dersDevamsizlikSayisi + 1} adet devamsızlığı var");
@@ -42,7 +44,6 @@ internal class IslemYapManager : IIslemYapManager
         //TODO burayı daha sonra test et hata çıkma potansiyeli var
         if (dersSayisi() > 0)
         {
-            //foreach yerine where yada linq yapılabilir mi?
 
             var dersvarmi = (from fders in dersleriGetir()
                              where fders.adi.ToLower() == ders.adi.ToLower()

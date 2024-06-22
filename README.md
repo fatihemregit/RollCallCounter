@@ -3,7 +3,8 @@
 ## Projenin Amacý
 Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlamak
 ## Bu Committe Yapýlan Ýþlemler
-- projenin veritabaný iþlemlerinin yeni mimariye uygun hale getirilmesi
+- genel kod düzeltmeleri
+
 ## Proje Günlüðü
 ### Gün 1 (18.01.2024)
 - Visual Studio Üzerinden Proje Oluþturuldu.
@@ -45,13 +46,13 @@ Projenin amacý üniversite ders devamsýzlýklarýnýn kolaylýkla tutulmasýný saðlama
 - IIslemYapManager dosyasýnýn kodlanmasý
 - projenin veritabaný iþlemlerinin yeni mimariye uygun hale getirilmesi
 ## yapýlacaklar
-dersdevamsizliklarigetir fonksiyonu hata veriyor onu düzelt (IslemYapInDatabase)
+dersdevamsizliklarigetir fonksiyonu hata veriyor onu düzelt (IslemYapInDatabase)(kod yeniden yazýldýðý için otomatik olarak düzeltildi)
 
-projedeki veritabanlý sistemde tarih seçimi hatasýnýn düzeltilmesi
+projedeki veritabanlý sistemde tarih seçimi hatasýnýn düzeltilmesi(kod yeniden yazýldýðý için otomatik olarak düzeltildi)
 ders seçiminde varolan ders eklenirse engelleme(yapýldý)
 
 
-genel kod düzeltmeleri
+ders daha önceden devamsýzlýk olarak eklenmiþ mi onun kontrol edilmesi
 
 
 
