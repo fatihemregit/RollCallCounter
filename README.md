@@ -9,5 +9,13 @@ Repository containing the source codes of the project that allows university stu
 Purpose of the project is "University class absences easly recorded".
 ## Transactions Made in This Commit
 + Readme Update
+## Used 
+### Language
++ C#(net8.0)
+### Database
++ Postgresql
+### Frameworks
++ EfCore(8.0.2)
+
 ## Project Diary
 this section will edit later.
