@@ -18,7 +18,10 @@ Purpose of the project is "University class absences easly recorded".
 + EfCore(8.0.2)
 
 ## Screenshots
-137,138,139,140
+<img src="https://github.com/fatihemregit/RollCallCounter/blob/master/Screenshots/Screenshot_137.png" width="302" height="298">
+<img src="https://github.com/fatihemregit/RollCallCounter/blob/master/Screenshots/Screenshot_138.png" width="540" height="299">
+<img src="https://github.com/fatihemregit/RollCallCounter/blob/master/Screenshots/Screenshot_139.png" width="540" height="297">
+<img src="https://github.com/fatihemregit/RollCallCounter/blob/master/Screenshots/Screenshot_140.png" width="539" height="298">
 
 ## Project Diary
 (this section translated by chatgbt)
