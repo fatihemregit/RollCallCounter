@@ -17,6 +17,9 @@ Purpose of the project is "University class absences easly recorded".
 ### Frameworks
 + EfCore(8.0.2)
 
+## Screenshots
+137,138,139,140
+
 ## Project Diary
 (this section translated by chatgbt)
 ### Day 1 (18.01.2024)
